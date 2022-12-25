@@ -33,6 +33,31 @@ fn display_matrix(matrix: &Matrix) {
 }
 
 fn transpose_matrix(matrix: &mut Matrix) -> &mut Matrix {
-    //implement
+    let short_row: i32;
+    let long_row: i32;
+
+    if matrix.m < matrix.n {
+        short_row = matrix.m;
+        long_row = matrix.n;
+    } else {
+        short_row = matrix.n;
+        long_row = matrix.m;
+    }
+
+    let mut test_matrix = Matrix {
+        array: matrix.array,
+        m: matrix.m,
+        n: matrix.n,
+    };
+
+    for i in 0..(matrix.m) {
+        for q in 0..(matrix.n) {
+            test_matrix.array[((i * short_row) + q) as usize] =
+                matrix.array[((q * long_row) + i) as usize];
+        }
+    }
+
+    matrix.array = test_matrix.array;
+
     return matrix;
 }
